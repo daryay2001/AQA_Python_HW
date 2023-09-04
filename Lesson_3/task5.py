@@ -12,6 +12,8 @@ num_list = user_ip.split(".")
 
 decision = None
 
+# v1
+
 if len(num_list) != 4:
     decision = "Incorrect IP-address"
 else:
@@ -28,3 +30,13 @@ else:
 
 print(decision)
 
+# v2
+
+if len(num_list) == 4:
+    for i in num_list:
+        if i.isdigit() and (0 <= int(i) <= 255):
+            decision = "IP-address is confirmed"
+else:
+    decision = "Incorrect IP-address"
+
+print(decision)
