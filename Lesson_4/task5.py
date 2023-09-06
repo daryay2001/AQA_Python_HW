@@ -8,3 +8,9 @@ for name in names_list:
         print(name)
     else:
         continue
+# v2
+
+for name in names_list:
+    if not isinstance(name, str):
+        continue
+    print(name)
