@@ -12,38 +12,70 @@
 # Використати всі блоки try, except, else, finally. В finally можна надрукувати за скільки спроб виконавлась формула
 # Результат виконання формули - float число з двома знаками після крапки
 
+class FormulaError(Exception):
+    pass
+
+
 class WrongOperatorError(Exception):
     pass
 
 
-try:
-    user_formula = input("Enter your expression: ").strip()
-    elem_list = user_formula.split()
+count = 0
 
-    num1 = float(elem_list[0])
-    operator = elem_list[1]
-    num2 = float(elem_list[2])
-    result = None
+while count != 3:
 
-    if operator == "+":
-        result = num1 + num2
-    elif operator == "-":
-        result = num1 - num2
-    elif operator == "*":
-        result = num1 * num2
-    elif operator == "/":
-        if num2 == 0:
-            raise ZeroDivisionError
+    try:
+        user_formula = input("Enter your expression: ").strip()
+        elem_list = user_formula.split()
+
+        if len(elem_list) != 3:
+            raise FormulaError("Entered formula is not correct!")
+
+        num1 = float(elem_list[0])
+        operator = elem_list[1]
+        num2 = float(elem_list[2])
+        result = None
+
+        if operator == "+":
+            result = num1 + num2
+        elif operator == "-":
+            result = num1 - num2
+        elif operator == "*":
+            result = num1 * num2
+        elif operator == "/":
+            if num2 == 0:
+                raise ZeroDivisionError
+            else:
+                result = num1 / num2
         else:
-            result = num1 / num2
+            raise WrongOperatorError("Wrong operator was entered!")
+
+    except FormulaError as error:
+        print(error)
+        print("Length of the formula should be 3!")
+
+    except WrongOperatorError as error:
+        print(error)
+        print("Please, enter +, -, * or /")
+
+    except ValueError as error:
+        print("You entered not a number!")
+
+    except ZeroDivisionError as error:
+        print("Division by Zero!")
+
+    except Exception as error:
+        print(error)
+
     else:
-        raise WrongOperatorError("Wrong operator was entered!")
+        print(f"{num1} {operator} {num2} = {result}")
+        if count == 0:
+            print("Code was executed without exceptions")
+        else:
+            print("You've miscalculated a few times")
+        break
 
-    print(f"{num1} {operator} {num2} = {result}")
+    finally:
+        count += 1
+        print(f"You have 3 attempts. Was used {count} attempts.")
 
-except Exception as error:
-    print(error)
-else:
-    pass
-finally:
-    pass
