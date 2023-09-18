@@ -9,16 +9,21 @@ def square_of_even_num(first_num, last_num):
 
     while sqr_num <= last_num:
         yield sqr_num ** 2
-        sqr_num += 2 # переходимо одразу до наступного парного числа, щоб знов не перевіряти
+        sqr_num += 2  # переходимо одразу до наступного парного числа, щоб знов не перевіряти
 
 
-my_gen_sqr = square_of_even_num(1, 10)
-# my_gen_sqr = square_of_even_num(10, 1)
+if __name__ == "__main__":
+    try:
 
-for i in my_gen_sqr: # Перевірка на малому ренджі
-    print(i)
+        my_gen_sqr = square_of_even_num(1, 10)
+        # my_gen_sqr = square_of_even_num(10, 1)
 
-big_sqr_gen = square_of_even_num(0, 1000000000) # Рішення комп не фрізить, проте дуже довго рахує, більш ніж 30хв
+        for i in my_gen_sqr:  # Перевірка на малому ренджі
+            print(i)
 
-for num in big_sqr_gen:
-    print(num)
+        big_sqr_gen = square_of_even_num(0, 1000000000)  # Рішення комп не фрізить, проте дуже довго рахує, більш ніж 30хв
+
+        for num in big_sqr_gen:
+            print(num)
+    except Exception as error:
+        print(error)
