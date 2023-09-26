@@ -14,7 +14,7 @@ class SanrioCompany:
         return self._specialization
 
     @specializaton.setter
-    def specializaton(self, specialization):
+    def specializaton(self, specialization: str):
         if isinstance(specialization, str):
             self._specialization = specialization
         else:
@@ -27,7 +27,7 @@ class SanrioCompany:
         print("We aim to achieve our corporate philosophy of everyone getting along together"
               "\nby creating smiles one person at a time and spreading the circle of happiness even further afield.")
 
-    def add_character(self, character):
+    def add_character(self, character: str):
         """This method will help you to add characters to the characters list"""
         if isinstance(character, str) and character in self.__charactes:
             print("Character is already added")
@@ -37,14 +37,14 @@ class SanrioCompany:
         else:
             print("Enter only string values")
 
-    def remove_character(self, character):
+    def remove_character(self, character: str):
         """This method will help you to remove characters from the characters list"""
         if character in self.__charactes:
             self.__charactes.remove(character)
         else:
             print(f"There is no such character: {character}, sorry =(")
 
-    def add_employee(self, employee):
+    def add_employee(self, employee: str):
         """This method will help you to add employees to the employees list"""
         if isinstance(employee, str) and employee in self.__employees:
             print("Employee is already added")
@@ -54,7 +54,7 @@ class SanrioCompany:
         else:
             print("Enter only string values")
 
-    def remove_employee(self, employee):
+    def remove_employee(self, employee: str):
         """This method will help you to remove employees from the employees list"""
         if employee in self.__employees:
             self.__employees.remove(employee)
