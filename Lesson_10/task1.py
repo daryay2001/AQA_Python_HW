@@ -1,6 +1,6 @@
 # 1 - Create a class describing any company. For example, Toshiba or Apple
 class SanrioCompany:
-    """This class is the description of the japanese company Sanrio"""
+
     COMPANY = "Sanrio"
 
     def __init__(self, specialization: str):
