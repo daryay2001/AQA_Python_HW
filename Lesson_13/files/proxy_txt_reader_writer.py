@@ -2,7 +2,7 @@
 from interfaces.iread import Read
 from txt_reader import TxtReader
 from interfaces.iwrite import Write
-from interfaces.txt_writer import TxtWriter
+from txt_writer import TxtWriter
 
 
 class ProxyTxtRW(Read, Write):
@@ -21,25 +21,25 @@ class ProxyTxtRW(Read, Write):
             self.__is_actual = True
             return self.__result
 
-    def write(self, data: str):
-        if self.__is_actual:
-            return self.__result
+    def write(self, new_data):
+        if self.__result == new_data:
+            return "This data already exists!"
         else:
-            self.__result = self.__real_writer.write(data)
+            self.__real_writer.write(new_data)
+            self.__result = new_data
             self.__is_actual = True
             return self.__result
 
 
 if __name__ == '__main__':
     try:
-        reader_reader = TxtReader('my_file.txt')
-        proxy = ProxyTxtRW(reader_reader)
-        print(proxy.read())  # тут прочитали файл
-        print(proxy.read())  # тут вже не читаємо, а забираємо текст файлу
-
+        my_reader = TxtReader('my_file.txt')
         my_writer = TxtWriter("my_file.txt")
-        my_proxy = ProxyTxtRW(my_writer)
-        print(my_proxy.write("Hello"))
+        my_proxy = ProxyTxtRW(my_reader, my_writer)
+
+        print(my_proxy.read())
+        print(my_proxy.write("This is a beautiful day!"))
+        print(my_proxy.read())
     except Exception as error:
         print(error)
 

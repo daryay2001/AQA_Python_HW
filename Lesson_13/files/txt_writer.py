@@ -1,4 +1,4 @@
-from iwrite import Write
+from interfaces.iwrite import Write
 
 
 class TxtWriter(Write):
